@@ -1,0 +1,79 @@
+﻿@using AttendenceSystem.Models;
+@model IEnumerable<CsteY4_T2_Students>
+
+@{
+    ViewBag.Title = "Multimedia Communication Students";
+}
+
+<div style="font-family:Arial">
+
+    <h2>Multimedia Communication Students</h2>
+    <form>
+
+        <table border="1" id="tblList">
+            <tr>
+                <th>Student Id</th>
+                <th>Student Name</th>
+                <th>Present Status</th>
+            </tr>
+
+            @foreach (CsteY4_T2_Students cstey4t2studens in @Model)
+            {
+                <tr>
+                    <td class="num">@cstey4t2studens.StudentId</td>
+                    <td class="num">@cstey4t2studens.StudentName</td>
+                    <td>
+                        <input name="chkStudent" value="@cstey4t2studens.StudentId" type="checkbox" />
+                    </td>
+                </tr>
+
+            }
+           
+        </table>
+        <input type="submit"  id="btnSave" class="addValue" value="Save" />
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        $('.addValue').click(tallyValues);
+
+    function tallyValues() {
+
+            $('#btnSave').on('click', function () {
+                var list = [];
+                $('input[name="chkStudent"]').each(function () {
+                    console.log($(this).val());
+                    if ($(this).is(':checked')) {
+                        list.push({ 'StudentId': $(this).val(), 'PresentValid': true })
+                    }
+                    else {
+                        list.push({ 'StudentId': $(this).val(), 'PresentValid': false })
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "~/Controllers/CsteY4T2Students/SaveStudent",
+                    data: { list: list },
+                    dataType: 'json',
+                    cache: false,
+                    success: function (data) {
+                        console.log('saved');
+                    },
+                    error: function (error) {
+                        console.log('error');
+                    },
+                    complete: function () {
+
+                    }
+                });
+            });
+    };
+</script>
+<div style="font-family:Arial">
+    @Html.ActionLink("Update Student List", "Index", "CsteY4_T2_Students")
+</div>
+
+
+  

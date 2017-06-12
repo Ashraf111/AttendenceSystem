@@ -1,0 +1,24 @@
+﻿@using AttendenceSystem.Models;
+@model IEnumerable<YearTerm>
+
+@{
+    ViewBag.Title = "YearTerm List";
+}
+<div style="font-family:Arial">
+    <h2>YearTerm List</h2>
+    <ul>
+        @foreach(YearTerm yearterms in @Model)
+        {
+
+            <li>
+                @Html.ActionLink(yearterms.YearTermName, "Subjectlist", "SubjectList", new { Yid = yearterms.YearTermId },null)
+            </li>
+        }
+
+
+    </ul>
+
+    @Html.ActionLink("Back to department List","DeptList","DeptList")
+
+</div>
+

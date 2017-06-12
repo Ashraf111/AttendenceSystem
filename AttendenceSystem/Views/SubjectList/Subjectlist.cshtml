@@ -1,0 +1,22 @@
+﻿@using AttendenceSystem.Models;
+@model IEnumerable<SubjectList>
+
+@{
+    ViewBag.Title = "Subject List";
+}
+<div style="font-family:Arial">
+    <h2>Subject List</h2>
+
+    <ul>
+        @foreach(SubjectList subjectlist in @Model)
+        {
+
+            <li>
+                @Html.ActionLink(subjectlist.SubjectName, "Cstey4t2students", "CsteY4T2Students", new { SubjectCode = subjectlist.SubjectCode}, null)
+            </li>
+        }
+    </ul>
+    @Html.ActionLink("Back to department List", "DeptList", "DeptList")
+
+</div>
+
