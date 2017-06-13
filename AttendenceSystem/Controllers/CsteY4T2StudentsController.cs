@@ -20,7 +20,7 @@ namespace AttendenceSystem.Controllers
         }
         public JsonResult SaveStudent(List<Student> list)
         {
-            Student student = new Student();
+            
            
             return Json(1, JsonRequestBehavior.AllowGet);
         }
